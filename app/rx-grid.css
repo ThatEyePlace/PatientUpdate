@@ -1,0 +1,1 @@
+.rx-table{grid-template-columns:64px repeat(4,minmax(112px,1fr))}@media(max-width:650px){.rx-table{grid-template-columns:50px repeat(4,100px)}}
