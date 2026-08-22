@@ -26,7 +26,7 @@ const sqlValue = (value) => {
   return `'${String(value).replaceAll("'", "''")}'`;
 };
 
-const statements = ["BEGIN TRANSACTION;"];
+const statements = [];
 for (const record of records) {
   statements.push(
     `INSERT OR IGNORE INTO patient_records (id,first_initial,last_name,previous_job_ids,current_job_id,rx,created_at,updated_at) VALUES (${[
@@ -41,7 +41,5 @@ for (const record of records) {
     ].map(sqlValue).join(",")});`,
   );
 }
-statements.push("COMMIT;");
-
 await writeFile("legacy-migration.sql", `${statements.join("\n")}\n`, "utf8");
 console.log(`Prepared ${records.length} live PatientUpdate records for migration.`);
